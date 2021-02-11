@@ -1,7 +1,3 @@
-#-------------------------------------------------------------------------------
-#
-#   
-#-------------------------------------------------------------------------------
 
 library(PNADcIBGE)
 library(convey)
@@ -10,9 +6,9 @@ library(tidyverse)
 
 #===============================================================================
 
-# Altere aqui o diretório e as variáveis para o último ano e Trimestre disponíveis:
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+setwd('..')
 
-setwd('C:/Users/Lucas/Desktop/desigualdades/')
 ano = 2020
 trimestre = 3
 
@@ -37,6 +33,17 @@ for (t in 1:trimestre) {
   pnadc <- convey_prep(pnadc)
   
   gini_estados <- svyby(~VD4019, by = ~UF, pnadc, svygini, na.rm  =  TRUE)
+  gini_br <- svygini(~VD4019, pnadc, na.rm  =  TRUE)
+  
+  gini_br <- gini_br %>% 
+    data.frame(stringsAsFactors = FALSE) %>%
+    mutate(UF = 'Brasil') %>%
+    rename(se = VD4019) %>%
+    rename(VD4019 = gini)
+  
+  gini_estados <- rbind(gini_estados, gini_br)
+  rm(gini_br)
+  
     rownames(gini_estados) <- NULL
   
   gini_estados <- gini_estados %>%
@@ -54,7 +61,7 @@ for (t in 1:trimestre) {
 
   
   
-  for (year in anos_completos) {
+for (year in anos_completos) {
     
     for (t in 1:4) {
       
@@ -65,6 +72,17 @@ for (t in 1:trimestre) {
       pnadc <- convey_prep(pnadc)
       
       gini_estados <- svyby(~VD4019, by = ~UF, pnadc, svygini, na.rm  =  TRUE)
+      gini_br <- svygini(~VD4019, pnadc, na.rm  =  TRUE)
+      
+      gini_br <- gini_br %>% 
+        data.frame(stringsAsFactors = FALSE) %>%
+        mutate(UF = 'Brasil') %>%
+        rename(se = VD4019) %>%
+        rename(VD4019 = gini)
+      
+      gini_estados <- rbind(gini_estados, gini_br)
+      rm(gini_br)
+      
       rownames(gini_estados) <- NULL
       
       gini_estados <- gini_estados %>%
@@ -79,7 +97,7 @@ for (t in 1:trimestre) {
       
     }
     
-  }
+}
   
   
   
@@ -93,6 +111,17 @@ for (t in trimestre:4) {
   pnadc <- convey_prep(pnadc)
   
   gini_estados <- svyby(~VD4019, by = ~UF, pnadc, svygini, na.rm  =  TRUE)
+  gini_br <- svygini(~VD4019, pnadc, na.rm  =  TRUE)
+  
+  gini_br <- gini_br %>% 
+    data.frame(stringsAsFactors = FALSE) %>%
+    mutate(UF = 'Brasil') %>%
+    rename(se = VD4019) %>%
+    rename(VD4019 = gini)
+  
+  gini_estados <- rbind(gini_estados, gini_br)
+  rm(gini_br)
+  
     rownames(gini_estados) <- NULL
   
   gini_estados <- gini_estados %>%

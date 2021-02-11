@@ -28,27 +28,13 @@ exec(open("./code/mapa-ie-genero.py", encoding = "utf-8").read())
 exec(open("./code/mapa-ie-racial.py", encoding = "utf-8").read())
 
 
-#  
-
-
-
-# Série do Índice de Gini por estado
-r['source']('code/gini.R')
+# Série do Índice de Gini por estado (pode demorar até 1h...)
+r['source']('./code/gini.R')
 exec(open("./code/plot-gini.py", encoding = "utf-8").read())
 
 
+# 
 
-
-
-
-
-# Gaps salariais de raça e gênero (OBS.: só rode se RAM > 32GB)
-
-
-
-
-
-
-
-
-
+# Gaps salariais de raça e gênero (OBS.: só rode se RAM > 32GB) [rodei no servidor, por isso vou deixar comentado]
+# r['source']('code/regs-municipais.R')
+# exec(open("./code/plot-gaps.py", encoding = "utf-8").read())
