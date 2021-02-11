@@ -28,7 +28,7 @@ exec(open("./code/mapa-ie-genero.py", encoding = "utf-8").read())
 exec(open("./code/mapa-ie-racial.py", encoding = "utf-8").read())
 
 
-# Série do Índice de Gini por estado (pode demorar até 1h...)
+# Série do Índice de Gini por estado [demora +/- 1h e não roda na SDE]
 r['source']('./code/gini.R')
 exec(open("./code/plot-gini.py", encoding = "utf-8").read())
 

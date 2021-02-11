@@ -5,15 +5,11 @@ Created on Wed Feb  3 08:47:47 2021
 @author: Lucas
 """
 
-import os
 import plotly.graph_objects as go
 import pandas as pd
 import json
 
-os.chdir('C:/Users/Lucas/Desktop/pnadc-reports')
-
 serie_gini = pd.read_csv('tmp/serie_gini.csv')
-
 
 color1 = 'rgb(64, 64, 64)'
 width1 = 4
@@ -22,6 +18,10 @@ size1 = 8
 color2 = 'rgb(192, 192, 192)'
 width2 = 2
 size2 = 4
+
+color3 = 'rgb(96, 96, 96)'
+width3 = 4
+size3 = 8
 
 fig = go.Figure()
 
@@ -32,6 +32,13 @@ fig.add_trace(go.Scatter(x = serie_gini['Ano_Tri'], y = serie_gini['São.Paulo']
                     name = 'SP', 
                     line = dict(color=color1, width = width1),
                     marker = dict(color = color1, size = size1))
+              )
+
+fig.add_trace(go.Scatter(x = serie_gini['Ano_Tri'], y = serie_gini['Brasil'],
+                    mode = 'lines+markers',
+                    name = 'BR', 
+                    line = dict(color=color3, width = width3, dash = 'dash'),
+                    marker = dict(color = color3, size = size3))
               )
 
 fig.add_trace(go.Scatter(x = serie_gini['Ano_Tri'], y = serie_gini['Acre'],
@@ -240,6 +247,6 @@ fig.update_layout(
 
 
 
-fig.write_html("tmp/gini.html",
+fig.write_html("output/gini.html",
                include_plotlyjs="cdn")
 
