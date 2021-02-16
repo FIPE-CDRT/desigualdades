@@ -9,6 +9,7 @@ O projeto foi implementado utilizando `Python 3.8.5`e `R 4.0.1`, mas espera-se q
   ```
 - R: <br>
   ```R
-  install.packages("tidyverse", "PNADcIBGE", "convey", "fixest")
+  install.packages("tidyverse", "PNADcIBGE", "convey", "fixest", "this.path")
   ```
 Para replicar todos os resultados, basta mudar os diretórios de trabalho e o caminho para o R como indicado no arquivo `master.py` e executá-lo.
+
