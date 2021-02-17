@@ -3,10 +3,11 @@ library(PNADcIBGE)
 library(convey)
 library(survey)
 library(tidyverse)
+library(this.path)
 
 #===============================================================================
 
-setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+setwd(this.dir(verbose = getOption("verbose")))
 setwd('..')
 
 ano = 2020
@@ -36,10 +37,10 @@ for (t in 1:trimestre) {
   gini_br <- svygini(~VD4019, pnadc, na.rm  =  TRUE)
   
   gini_br <- gini_br %>% 
-    data.frame(stringsAsFactors = FALSE) %>%
-    mutate(UF = 'Brasil') %>%
-    rename(se = VD4019) %>%
-    rename(VD4019 = gini)
+             data.frame(stringsAsFactors = FALSE) %>%
+             mutate(UF = 'Brasil') %>%
+             rename(se = VD4019) %>%
+             rename(VD4019 = gini)
   
   gini_estados <- rbind(gini_estados, gini_br)
   rm(gini_br)
