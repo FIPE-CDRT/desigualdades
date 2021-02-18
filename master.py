@@ -6,7 +6,6 @@ Created on Thu Feb 11 10:22:54 2021
 """
 
 import os
-import rpy2.robjects as robjects
 
 # Mude aqui para o diretório onde se encontra este script
 os.chdir('C:/Users/Lucas/Desktop/desigualdades/')
@@ -14,6 +13,7 @@ os.chdir('C:/Users/Lucas/Desktop/desigualdades/')
 # Mude aqui para o diretório onde encontra o R (como abaixo)
 os.environ['R_HOME'] = 'C:/Program Files/R/R-4.0.1/'
 
+import rpy2.robjects as robjects  # tem que vir depois da definição do path do R
 r = robjects.r
 
 os.mkdir('tmp/')

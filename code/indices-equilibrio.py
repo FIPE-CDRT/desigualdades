@@ -82,7 +82,7 @@ b_ocup_setor = (pnadc
                 .groupby(['UF', 'setor', 'cod'])
                 .agg(b_mulher=('mulher', wm),
                      b_negro=('negro', wm),
-                     massa_salarial=('salario', 'sum'))    
+                     massa_salarial=('salario', 'sum'))
                 .reset_index()
                 )
 
@@ -121,7 +121,7 @@ indice_estado['ie_genero'] = indice_estado['ie_genero_pre']/indice_estado['massa
 
 
 # DFs separados para cada índice ==============================================
- 
+
 ie_genero = (indice_estado.pivot(index='UF',
                                  columns='setor',
                                  values='ie_genero')
