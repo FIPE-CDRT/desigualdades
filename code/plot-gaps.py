@@ -7,10 +7,9 @@ Created on Wed Feb  3 09:03:14 2021
 
 import os
 import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 import pandas as pd
 import json
-
-os.chdir('C:/Users/Lucas/Desktop/rais-wage-gap')
 
 wage_gaps = pd.read_csv('tmp/wage_gaps.csv')
 
@@ -19,11 +18,31 @@ with open('input/sp_simple3.geojson', encoding='utf-8') as response:
 
 nomes = pd.read_csv('input/sp_hard2.csv', encoding = 'utf-8')
 
-wage_gaps = wage_gaps.merge(nomes, left_on = 'Mun', right_on = 'code' )
+wage_gaps = wage_gaps.merge(nomes, left_on='Mun', right_on='code' )
+wage_gaps.loc[wage_gaps.p_valor_negros > 0.10, 'gap_negros'] = 0
+wage_gaps.loc[wage_gaps.p_valor_mulheres > 0.10, 'gap_mulheres'] = 0
+
+wage_gaps = wage_gaps.round({'gap_negros': 4, 'gap_mulheres': 4})
+
+gaps_racial = (wage_gaps[['name', 'gap_negros']])
+gaps_racial1 = gaps_racial.sort_values('name')
+gaps_racial2 = gaps_racial.sort_values('gap_negros')
+
+gaps_genero = (wage_gaps[['name', 'gap_mulheres']])
+gaps_genero1 = gaps_genero.sort_values('name')
+gaps_genero2 = gaps_genero.sort_values('gap_mulheres')
+
+# -----------------------------------------------------------------------------
 
 # Create figure
-fig = go.Figure()
-
+fig = make_subplots(
+    rows=2, cols=2,
+    shared_xaxes=False,
+    column_widths=[0.25, 0.75],
+    vertical_spacing=0.05,
+    specs=[[{"type": "table"}, {"type": "choropleth", "rowspan": 2}],
+           [{"type": "table"}, None]]
+)
 
 fig.add_trace(go.Choropleth(geojson = mapa_mun_sp,
                             featureidkey = "properties.CD_GEOCMU",
@@ -33,7 +52,27 @@ fig.add_trace(go.Choropleth(geojson = mapa_mun_sp,
                             colorscale = "Viridis",
                             colorbar_title = "Diferença salarial <br> (negros - brancos)",
                             marker_line_color = 'white',
-                            marker_line_width = 0.8))
+                            marker_line_width = 0.8),
+              row=1, col=2)
+
+
+# Add tabela aqui
+
+fig.add_trace(go.Table(header=dict(values=["Município", "Gap Salarial"],
+                  font=dict(size=10),
+                  align="left"),
+                  cells=dict(values=[gaps_racial1[k].tolist() for k in gaps_racial1.columns[0:]],
+                             align="left")), 
+                  row=1, col=1)
+
+
+fig.add_trace(go.Table(header=dict(values=["Município", "Gap Salarial"],
+                  font=dict(size=10),
+                  align="left"),
+                  cells=dict(values=[gaps_racial2[k].tolist() for k in gaps_racial2.columns[0:]],
+                             align="left")), 
+                  row=2, col=1)
+
 
 fig.update_layout(
     title_text = 'Gap Salarial entre Negros e Brancos',
@@ -52,8 +91,8 @@ fig.update_layout(
         )]    
 )
 
-fig.update_geos(fitbounds = 'locations',
-                visible = False)
+fig.update_geos(fitbounds='locations',
+                visible=False)
 
 fig.write_html("tmp/gap_racial.html",
                include_plotlyjs="cdn")
@@ -63,7 +102,14 @@ fig.write_html("tmp/gap_racial.html",
 
 
 # Create figure
-fig = go.Figure()
+fig = make_subplots(
+    rows=2, cols=2,
+    shared_xaxes=False,
+    column_widths=[0.25, 0.75],
+    vertical_spacing=0.05,
+    specs=[[{"type": "table"}, {"type": "choropleth", "rowspan": 2}],
+           [{"type": "table"}, None]]
+)
 
 
 fig.add_trace(go.Choropleth(geojson = mapa_mun_sp,
@@ -74,7 +120,26 @@ fig.add_trace(go.Choropleth(geojson = mapa_mun_sp,
                             colorscale = "Viridis",
                             colorbar_title = "Diferença salarial <br> (mulheres - homens)",
                             marker_line_color = 'white',
-                            marker_line_width = 0.8))
+                            marker_line_width = 0.8),
+              row=1, col=2)
+
+# Add tabela aqui
+
+fig.add_trace(go.Table(header=dict(values=["Município", "Gap Salarial"],
+                  font=dict(size=10),
+                  align="left"),
+                  cells=dict(values=[gaps_genero1[k].tolist() for k in gaps_genero1.columns[0:]],
+                             align="left")), 
+                  row=1, col=1)
+
+
+fig.add_trace(go.Table(header=dict(values=["Município", "Gap Salarial"],
+                  font=dict(size=10),
+                  align="left"),
+                  cells=dict(values=[gaps_genero2[k].tolist() for k in gaps_genero2.columns[0:]],
+                             align="left")), 
+                  row=2, col=1)
+
 
 fig.update_layout(
     title_text = 'Gap Salarial entre Mulheres e Homens',
@@ -93,8 +158,8 @@ fig.update_layout(
         )]    
 )
 
-fig.update_geos(fitbounds = 'locations',
-                visible = False)
+fig.update_geos(fitbounds='locations',
+                visible=False)
 
 fig.write_html("tmp/gap_genero.html",
                include_plotlyjs="cdn")
