@@ -5,7 +5,6 @@ import plotly.graph_objects as go
 import pandas as pd
 import json
 
-
 # GeoJSON do mapa dos estados
 
 with open('input/GEOBR.geojson', encoding='utf-8') as response:
