@@ -56,7 +56,7 @@ fig.add_trace(go.Scatter(x=serie_gini['Ano_Tri'], y=serie_gini['Alagoas'],
               )
 fig.add_trace(go.Scatter(x=serie_gini['Ano_Tri'], y=serie_gini['Amapá'],
                          mode='lines+markers',
-                         name='AM',
+                         name='AP',
                          visible='legendonly',
                          line=dict(color=color2, width=width2),
                          marker=dict(color=color2, size=size2))
@@ -235,7 +235,7 @@ fig.update_layout(
         go.layout.Annotation(x=0.5,
                              y=-0.15,
                              text=('Desigualdade de renda do trabalho medida com dados das '
-                                   'PNADs Contínuas Trimestrais.'
+                                   'PNADs Contínuas Trimestrais. '
                                    'Clique nas siglas da legenda para plotar mais estados.'),
                              showarrow=False,
                              xref='paper',
