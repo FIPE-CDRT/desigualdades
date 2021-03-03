@@ -36,8 +36,8 @@ conditions = [
     (wage_gaps["gap_negros"].le(0-1*std_racial) & wage_gaps["gap_negros"].gt(0-2*std_racial)),
     (wage_gaps["gap_negros"].le(0-2*std_racial)),
 ]
-choices = ["-", "Equitativos", "Balanceados", "Em Transição", "Desiguais",
-           "Vulneráveis"]
+choices = ["-", "Muito baixo", "Baixo", "Médio", "Alto",
+           "Muito alto"]
 
 wage_gaps["Categorias - Racial"] = np.select(conditions, choices)
 wage_gaps.loc[wage_gaps['name']=='Lourdes', 'Categorias - Racial'] = '-'
@@ -51,8 +51,8 @@ conditions = [
     (wage_gaps["gap_mulheres"].le(0-1*std_genero) & wage_gaps["gap_mulheres"].gt(0-2*std_genero)),
     (wage_gaps["gap_mulheres"].le(0-2*std_genero)),
 ]
-choices = ["-", "Equitativos", "Balanceados", "Em Transição", "Desiguais",
-           "Vulneráveis"]
+choices = ["-", "Muito baixo", "Baixo", "Médio", "Alto",
+           "Muito alto"]
 
 wage_gaps["Categorias - Gênero"] = np.select(conditions, choices)
 
@@ -104,18 +104,18 @@ fig = px.choropleth(wage_gaps,
                     locations='Mun',
                     hover_name='name',
                     color='Categorias - Racial',
-                    category_orders={"Categorias - Racial": ["Equitativos",
-                                                             "Balanceados",
-                                                             "Em Transição",
-                                                             "Desiguais",
-                                                             "Vulneráveis"]
+                    category_orders={"Categorias - Racial": ["Muito baixo",
+                                                             "Baixo",
+                                                             "Médio",
+                                                             "Alto",
+                                                             "Muito alto"]
                                      },
                     color_discrete_map={'-': 'grey',
-                                        'Equitativos': 'rgb(110, 169, 179)',
-                                        'Balanceados': 'rgb(207, 226, 230)',
-                                        'Em Transição': 'rgb(255, 218, 103)',
-                                        'Desiguais': 'rgb(255, 136, 51)',
-                                        'Vulneráveis': 'rgb(127, 30, 8)'})
+                                        'Muito baixo': 'rgb(110, 169, 179)',
+                                        'Baixo': 'rgb(207, 226, 230)',
+                                        'Médio': 'rgb(255, 218, 103)',
+                                        'Alto': 'rgb(255, 136, 51)',
+                                        'Muito alto': 'rgb(127, 30, 8)'})
 
 fig.update_layout(
     title_text='<b>Gap Salarial entre Negros e Brancos</b>',
@@ -184,18 +184,18 @@ fig = px.choropleth(wage_gaps,
                     locations='Mun',
                     hover_name='name',
                     color='Categorias - Gênero',
-                    category_orders={"Categorias - Gênero": ["Equitativos",
-                                                             "Balanceados",
-                                                             "Em Transição",
-                                                             "Desiguais",
-                                                             "Vulneráveis"]
+                    category_orders={"Categorias - Gênero": ["Muito baixo",
+                                                             "Baixo",
+                                                             "Médio",
+                                                             "Alto",
+                                                             "Muito alto"]
                                      },
                     color_discrete_map={'-': 'grey',
-                                        'Equitativos': 'rgb(110, 169, 179)',
-                                        'Balanceados': 'rgb(207, 226, 230)',
-                                        'Em Transição': 'rgb(255, 218, 103)',
-                                        'Desiguais': 'rgb(255, 136, 51)',
-                                        'Vulneráveis': 'rgb(127, 30, 8)'})
+                                        'Muito baixo': 'rgb(110, 169, 179)',
+                                        'Baixo': 'rgb(207, 226, 230)',
+                                        'Médio': 'rgb(255, 218, 103)',
+                                        'Alto': 'rgb(255, 136, 51)',
+                                        'Muito alto': 'rgb(127, 30, 8)'})
 
 
 fig.update_layout(
