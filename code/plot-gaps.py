@@ -7,7 +7,6 @@ Created on Wed Feb  3 09:03:14 2021
 
 import plotly.graph_objects as go
 import plotly.express as px
-from plotly.subplots import make_subplots
 import pandas as pd
 import numpy as np
 import json
