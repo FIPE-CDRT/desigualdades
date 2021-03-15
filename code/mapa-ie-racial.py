@@ -85,15 +85,15 @@ fig.update_layout(
     ])
 
 fig.update_layout(
-    title_text='Índice de Equilíbrio Racial',
+    title_text='<b>Índice de Equilíbrio Racial</b> <br>'
+               'IER = 1: brancos excluídos. <br>'
+               'IER = -1: negros excluídos.',
     annotations=[
         go.layout.Annotation(x=0.5,
                              y=-0.1,
                              text=('Nota: IER calculado baseado em '
                                    '<a href="https://www.insper.edu.br/wp-content/uploads/2020/12/IER_Firpo_Franca_Cavalcanti_.pdf">Firpo, França e Rodrigues (2020)</a> '
-                                   'com dados do 3T da PNADC de 2020. <br>'
-                                   'IER = 1: brancos excluídos. <br>'
-                                   'IER = -1: negros excluídos.'),
+                                   'com dados do 4T da PNADC de 2020.'),
                              showarrow=False,
                              xref='paper',
                              yref='paper',

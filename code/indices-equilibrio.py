@@ -5,60 +5,18 @@
 import pandas as pd
 import numpy as np
 import pnadc
-import requests
 
 # =============================================================================
 
 
 # Download e build da PNAD ====================================================
-# mudar essa parte depois da atualização do pacote
 
-def download_file_from_google_drive(id, destination):
-    URL = "https://docs.google.com/uc?export=download"
-
-    session = requests.Session()
-
-    response = session.get(URL, params={'id': id}, stream=True)
-    token = get_confirm_token(response)
-
-    if token:
-        params = {'id': id, 'confirm': token}
-        response = session.get(URL, params=params, stream=True)
-
-    save_response_content(response, destination)    
-
-
-def get_confirm_token(response):
-    for key, value in response.cookies.items():
-        if key.startswith('download_warning'):
-            return value
-
-    return None
-
-
-def save_response_content(response, destination):
-    CHUNK_SIZE = 32768
-
-    with open(destination, "wb") as f:
-        for chunk in response.iter_content(CHUNK_SIZE):
-            if chunk:   # filter out keep-alive new chunks
-                f.write(chunk)
-
-
-file_id = '1s2IiZ_7u_ihbVbqfZsj2JDEHzQNgct-7'
-destination = 'PNADC_032020.txt'
-download_file_from_google_drive(file_id, destination)
-
-
-pnadc.extract.docs('tmp/')
-
-pnad_raw = pnadc.build(data_file='PNADC_032020.txt',
-                       input_file='input/input_PNADC_trimestral.txt')
+pnad_raw = pnadc.get(quarter=4, year=2020)
 
 # =============================================================================
 
 
-# Cálculo dos IEs ============================================================= 
+# Cálculo dos IEs =============================================================
 
 pnadc = (pnad_raw
          .filter(items=['V2007', 'V2010', 'V4010', 'VD4010', 'VD4016', 'VD4002', 'V1028', 'UF'])

@@ -56,7 +56,7 @@ fig.add_trace(go.Scatter(x=serie_gini['Ano_Tri'], y=serie_gini['Alagoas'],
               )
 fig.add_trace(go.Scatter(x=serie_gini['Ano_Tri'], y=serie_gini['Amapá'],
                          mode='lines+markers',
-                         name='AM',
+                         name='AP',
                          visible='legendonly',
                          line=dict(color=color2, width=width2),
                          marker=dict(color=color2, size=size2))
@@ -225,17 +225,18 @@ fig.add_trace(go.Scatter(x=serie_gini['Ano_Tri'], y=serie_gini['Tocantins'],
 
 
 fig.update_layout(
-    title_text='Evolução da Desigualdade de Renda',
+    title_text='<b>Evolução da Desigualdade de Renda</b> <br>'
+               'Gini = 1: concentração absoluta na distribuição de renda. <br>'
+               'Gini = 0: igualdade absoluta na distribuição de renda.',
+    title_x=0.5,
     xaxis_title=" ",
     yaxis_title="Índice de Gini",
     annotations=[
         go.layout.Annotation(x=0.5,
                              y=-0.15,
                              text=('Desigualdade de renda do trabalho medida com dados das '
-                                   'PNADs Contínuas Trimestrais.'
-                                   'Clique nas siglas da legenda para plotar mais estados. <br>'
-                                   'Gini = 1: concentração absoluta na distribuição de renda. <br>'
-                                   'Gini = 0: igualdade absoluta na distribuição de renda.'),
+                                   'PNADs Contínuas Trimestrais. '
+                                   'Clique nas siglas da legenda para plotar mais estados.'),
                              showarrow=False,
                              xref='paper',
                              yref='paper',
