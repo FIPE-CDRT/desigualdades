@@ -93,7 +93,7 @@ fig.update_layout(
                              y=-0.1,
                              text=('Nota: IEG calculado baseado em '
                                    '<a href="https://www.insper.edu.br/wp-content/uploads/2020/12/IER_Firpo_Franca_Cavalcanti_.pdf">Firpo, França e Rodrigues (2020)</a> '
-                                   'com dados do 3T da PNADC de 2020.'),
+                                   'com dados do 4T da PNADC de 2020.'),
                              showarrow=False,
                              xref='paper',
                              yref='paper',
