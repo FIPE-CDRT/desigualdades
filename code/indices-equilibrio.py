@@ -11,7 +11,7 @@ import pnadc
 
 # Download e build da PNAD ====================================================
 
-pnad_raw = pnadc.get(quarter=4, year=2020)
+pnad_raw = pnadc.get(quarter=1, year=2021)
 
 # =============================================================================
 

@@ -7,6 +7,7 @@ Created on Wed Feb  3 09:03:14 2021
 
 import plotly.graph_objects as go
 import plotly.express as px
+from plotly.subplots import make_subplots
 import pandas as pd
 import numpy as np
 import json
@@ -56,13 +57,13 @@ choices = ["-", "Muito baixo", "Baixo", "Médio", "Alto",
 wage_gaps["Categorias - Gênero"] = np.select(conditions, choices)
 
 
-gaps_racial = (wage_gaps[['name', 'gap_negros']])
+gaps_racial = (wage_gaps[['name', 'Categorias - Racial']])
 gaps_racial1 = gaps_racial.sort_values('name')
-gaps_racial2 = gaps_racial.sort_values('gap_negros')
+gaps_racial2 = gaps_racial.sort_values('Categorias - Racial')
 
-gaps_genero = (wage_gaps[['name', 'gap_mulheres']])
+gaps_genero = (wage_gaps[['name', 'Categorias - Gênero']])
 gaps_genero1 = gaps_genero.sort_values('name')
-gaps_genero2 = gaps_genero.sort_values('gap_mulheres')
+gaps_genero2 = gaps_genero.sort_values('Categorias - Gênero')
 
 
 # -----------------------------------------------------------------------------
