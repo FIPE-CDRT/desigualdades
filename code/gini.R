@@ -11,7 +11,7 @@ setwd(this.dir(verbose = getOption("verbose")))
 setwd('..')
 
 ano = 2021
-trimestre = 1
+trimestre = 2
 
 #===============================================================================
 
