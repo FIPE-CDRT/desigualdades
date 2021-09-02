@@ -11,7 +11,9 @@ import pnadc
 
 # Download e build da PNAD ====================================================
 
-pnad_raw = pnadc.get(quarter=1, year=2021)
+# pnad_raw = pnadc.get(quarter=2, year=2021)
+
+pnad_raw = pnadc.build("PNADC_022021.txt", input_file="input_PNADC_trimestral.txt")
 
 # =============================================================================
 
